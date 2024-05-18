@@ -1,18 +1,15 @@
 import MyButton from "./components/MyButton/MyButton";
+import Profile from "./components/Profile/Profile.tsx";
 
 function App() {
-    const user = {
-        name: "Дмитрий",
-        imageUrl: "/vite.svg",
-    }
+  const isLoggedIn = true;
+
   return (
     <>
-      Hello world:
-        { user.name }
-        <img src={user.imageUrl} alt=""/>
+      {isLoggedIn && <Profile />}
       <MyButton />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
