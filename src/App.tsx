@@ -1,5 +1,6 @@
 import MyButton from "./components/MyButton/MyButton";
 import Profile from "./components/Profile/Profile.tsx";
+import ProductList from "./components/ProductList/ProductList.tsx";
 
 function App() {
   const isLoggedIn = true;
@@ -7,6 +8,7 @@ function App() {
   return (
     <>
       {isLoggedIn && <Profile />}
+      <ProductList />
       <MyButton />
     </>
   );

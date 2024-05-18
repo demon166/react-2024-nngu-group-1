@@ -1,16 +1,19 @@
-const Product = () => {
-  const product = {
-    id: 1,
-    name: "Наручные часы мужские SKMEI 1251",
-    imageUrl:
-      "https://main-cdn.sbermegamarket.ru/big2/hlr-system/214/156/886/511/117/11/600004929632b0.jpeg",
-    price: 8165,
-    discount: 90,
-    rating: 4.7,
-    isFavorite: false,
-  };
+import { ProductItem } from "../../types/product.ts";
 
-  return <div>{product.name}</div>;
+interface ProductProps {
+  product: ProductItem;
+}
+
+const Product = (props: ProductProps) => {
+  const { product } = props;
+
+  return (
+    <div>
+      <p>{product.name}</p>
+      <p>{product.price}</p>
+      <p>{product.discount?.value}</p>
+    </div>
+  );
 };
 
 export default Product;
