@@ -7,3 +7,11 @@ export interface ProductItem {
     value: number;
   };
 }
+
+interface ProductItemInCart extends ProductItem {
+  count: number;
+}
+
+export interface ICart {
+  items: ProductItemInCart[];
+}

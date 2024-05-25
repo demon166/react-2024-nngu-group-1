@@ -1,8 +1,14 @@
 import Product from "../Product/Product.tsx";
-import { ProductItem } from "../../types/product.ts";
+import { ICart, ProductItem } from "../../types/product.ts";
 import Row from "../Row/Row.tsx";
+import { Dispatch, FC, SetStateAction } from "react";
 
-const ProductList = () => {
+interface ProductListProps {
+  setCart: Dispatch<SetStateAction<ICart>>;
+}
+
+const ProductList: FC<ProductListProps> = (props) => {
+  const { setCart } = props;
   const products: ProductItem[] = [
     {
       id: 1,
@@ -29,12 +35,13 @@ const ProductList = () => {
       },
     },
   ];
-  const list = products.map((product) => {
-    return <Product key={product.id} product={product} />;
-  });
   return (
     <div>
-      <Row direction="column">{list}</Row>
+      <Row direction="row">
+        {products.map((product) => (
+          <Product key={product.id} product={product} setCart={setCart} />
+        ))}
+      </Row>
     </div>
   );
 };
