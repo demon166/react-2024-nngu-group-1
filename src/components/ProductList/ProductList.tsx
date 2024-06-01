@@ -1,14 +1,15 @@
 import Product from "../Product/Product.tsx";
 import { ICart, ProductItem } from "../../types/product.ts";
 import Row from "../Row/Row.tsx";
-import { Dispatch, FC, SetStateAction } from "react";
+import { FC } from "react";
+import { Updater } from "use-immer";
 
 interface ProductListProps {
-  setCart: Dispatch<SetStateAction<ICart>>;
+  updateCart: Updater<ICart>;
 }
 
 const ProductList: FC<ProductListProps> = (props) => {
-  const { setCart } = props;
+  const { updateCart } = props;
   const products: ProductItem[] = [
     {
       id: 1,
@@ -39,7 +40,7 @@ const ProductList: FC<ProductListProps> = (props) => {
     <div>
       <Row direction="row">
         {products.map((product) => (
-          <Product key={product.id} product={product} setCart={setCart} />
+          <Product key={product.id} product={product} updateCart={updateCart} />
         ))}
       </Row>
     </div>

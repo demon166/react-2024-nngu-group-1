@@ -1,31 +1,47 @@
 import { ICart, ProductItem } from "../../types/product.ts";
 import MyButton from "../MyButton/MyButton.tsx";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import ChangeCountProduct from "../ChangeCountProduct/ChangeCountProduct.tsx";
+import { Updater } from "use-immer";
 
 interface ProductProps {
   product: ProductItem;
-  setCart: Dispatch<SetStateAction<ICart>>;
+  updateCart: Updater<ICart>;
 }
 
 const Product = (props: ProductProps) => {
-  const { product, setCart } = props;
+  const { product, updateCart } = props;
 
   const [count, setCount] = useState(0);
   const incrementCart = () => {
     const nextState = count + 1;
     setCount(nextState);
 
-    setCart((prevState) => {
-      return {
-        ...prevState,
-        items: [...prevState.items, { ...product, count: nextState }],
-      };
+    updateCart((draft) => {
+      const findProduct = draft.items.find((item) => item.id === product.id);
+      if (findProduct) {
+        findProduct.count += 1;
+      } else {
+        draft.items.push({ ...product, count: 1 });
+      }
     });
   };
 
   const decrementCart = () => {
     setCount((prevState) => prevState - 1);
+    updateCart((draft) => {
+      const findProduct = draft.items.find((item) => item.id === product.id);
+      if (findProduct) {
+        findProduct.count -= 1;
+      } else {
+        throw new Error(
+          "Попытка изменить количество товара которого нет в корзине",
+        );
+      }
+      if (findProduct.count === 0) {
+        draft.items = draft.items.filter((item) => item.id !== product.id);
+      }
+    });
   };
 
   return (
