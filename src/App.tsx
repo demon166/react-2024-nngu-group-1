@@ -1,8 +1,6 @@
-import Profile from "./components/Profile/Profile.tsx";
-import ProductList from "./components/ProductList/ProductList.tsx";
-import Cart from "./components/Cart/Cart.tsx";
-import { ICart } from "./types/product.ts";
 import { useImmer } from "use-immer";
+import { ICart } from "@/types";
+import { Profile, ProductList, Cart } from "@/components";
 
 function App() {
   const isLoggedIn = true;

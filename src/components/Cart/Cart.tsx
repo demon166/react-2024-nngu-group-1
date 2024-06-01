@@ -1,5 +1,5 @@
-import { ICart } from "../../types/product.ts";
 import { FC } from "react";
+import { ICart } from "@/types";
 
 interface CartProps {
   cart: ICart;

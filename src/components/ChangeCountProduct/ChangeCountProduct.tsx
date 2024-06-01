@@ -1,5 +1,5 @@
-import MyButton from "../MyButton/MyButton.tsx";
 import { FC } from "react";
+import { MyButton } from "@/components";
 
 interface ChangeCountProductProps {
   count: number;

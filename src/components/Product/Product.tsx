@@ -1,8 +1,7 @@
-import { ICart, ProductItem } from "../../types/product.ts";
-import MyButton from "../MyButton/MyButton.tsx";
 import { useState } from "react";
-import ChangeCountProduct from "../ChangeCountProduct/ChangeCountProduct.tsx";
 import { Updater } from "use-immer";
+import { ICart, ProductItem } from "@/types";
+import { MyButton, ChangeCountProduct } from "@/components";
 
 interface ProductProps {
   product: ProductItem;

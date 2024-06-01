@@ -1,8 +1,7 @@
-import Product from "../Product/Product.tsx";
-import { ICart, ProductItem } from "../../types/product.ts";
-import Row from "../Row/Row.tsx";
 import { FC } from "react";
 import { Updater } from "use-immer";
+import { ICart, ProductItem } from "@/types";
+import { Row, Product } from "@/components";
 
 interface ProductListProps {
   updateCart: Updater<ICart>;
