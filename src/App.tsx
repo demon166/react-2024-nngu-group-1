@@ -1,6 +1,6 @@
 import { useImmer } from "use-immer";
 import { ICart } from "@/types";
-import { Profile, ProductList, Cart } from "@/components";
+import { Cart, Counter, ProductList, Profile } from "@/components";
 
 function App() {
   const isLoggedIn = true;
@@ -10,6 +10,7 @@ function App() {
 
   return (
     <>
+      <Counter />
       {isLoggedIn && <Profile />}
       <ProductList updateCart={updateCart} />
       <Cart cart={cart} />

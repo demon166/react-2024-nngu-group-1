@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Updater } from "use-immer";
 import { ICart, ProductItem } from "@/types";
-import { MyButton, ChangeCountProduct } from "@/components";
+import { ChangeCountProduct, MyButton } from "@/components";
 
 interface ProductProps {
   product: ProductItem;
@@ -10,7 +10,6 @@ interface ProductProps {
 
 const Product = (props: ProductProps) => {
   const { product, updateCart } = props;
-
   const [count, setCount] = useState(0);
   const incrementCart = () => {
     const nextState = count + 1;

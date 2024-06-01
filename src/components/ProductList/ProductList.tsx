@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Updater } from "use-immer";
 import { ICart, ProductItem } from "@/types";
-import { Row, Product } from "@/components";
+import { Product, Row } from "@/components";
 
 interface ProductListProps {
   updateCart: Updater<ICart>;
