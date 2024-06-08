@@ -1,34 +1,39 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { ProductItem } from "@/types";
 import { Product, Row } from "@/components";
+import { api } from "@/app/api";
 
 const ProductList: FC = () => {
-  const products: ProductItem[] = [
-    {
-      id: 1,
-      name: "Товар 1",
-      price: 50,
-    },
-    {
-      id: 2,
-      name: "Товар 2",
-      price: 150,
-    },
-    {
-      id: 3,
-      name: "Товар 3",
-      price: 250,
-    },
-    {
-      id: 4,
-      name: "товар 4",
-      price: 500,
-      discount: {
-        type: "percent",
-        value: 10,
-      },
-    },
-  ];
+  const [products, setProduct] = useState<ProductItem[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState("");
+
+  const getProduct = async () => {
+    setIsLoading(true);
+    try {
+      const { data } = await api.get("/products");
+      setProduct(data);
+    } catch (e) {
+      console.error(e);
+      setError(e as string);
+      setIsError(true);
+    }
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    getProduct();
+  }, []);
+
+  if (isLoading) {
+    return <h1>Загрузка</h1>;
+  }
+
+  if (isError) {
+    return <h1>Ошибка.... {error}</h1>;
+  }
+
   return (
     <div>
       <Row direction="row">
