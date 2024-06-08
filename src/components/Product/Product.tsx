@@ -1,45 +1,32 @@
-import { useState } from "react";
-import { Updater } from "use-immer";
-import { ICart, ProductItem } from "@/types";
+import { ProductItem } from "@/types";
 import { ChangeCountProduct, MyButton } from "@/components";
+import { useContext } from "react";
+import { CartContext } from "@/context";
+import { changeCount } from "@/context/Cart/actions";
 
 interface ProductProps {
   product: ProductItem;
-  updateCart: Updater<ICart>;
 }
 
 const Product = (props: ProductProps) => {
-  const { product, updateCart } = props;
-  const [count, setCount] = useState(0);
-  const incrementCart = () => {
-    const nextState = count + 1;
-    setCount(nextState);
+  const { product } = props;
+  const { cart, dispatch } = useContext(CartContext);
 
-    updateCart((draft) => {
-      const findProduct = draft.items.find((item) => item.id === product.id);
-      if (findProduct) {
-        findProduct.count += 1;
-      } else {
-        draft.items.push({ ...product, count: 1 });
-      }
-    });
+  const count =
+    cart.items.find((productItem) => productItem.id === product.id)?.count || 0;
+
+  const incrementCart = () => {
+    dispatch(changeCount(product, count + 1));
   };
 
   const decrementCart = () => {
-    setCount((prevState) => prevState - 1);
-    updateCart((draft) => {
-      const findProduct = draft.items.find((item) => item.id === product.id);
-      if (findProduct) {
-        findProduct.count -= 1;
-      } else {
-        throw new Error(
-          "Попытка изменить количество товара которого нет в корзине",
-        );
-      }
-      if (findProduct.count === 0) {
-        draft.items = draft.items.filter((item) => item.id !== product.id);
-      }
-    });
+    dispatch(changeCount(product, count - 1));
+  };
+
+  const changeCartCount: React.ChangeEventHandler<HTMLInputElement> = (
+    event,
+  ) => {
+    dispatch(changeCount(product, +event.target.value));
   };
 
   return (
@@ -54,6 +41,7 @@ const Product = (props: ProductProps) => {
             count={count}
             onDecrementCount={decrementCart}
             onIncrementCount={incrementCart}
+            handleChangeCount={changeCartCount}
           />
         )}
       </div>

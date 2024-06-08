@@ -6,6 +6,7 @@ export interface ProductItem {
     type: "percent" | "fix";
     value: number;
   };
+  count?: number;
 }
 
 interface ProductItemInCart extends ProductItem {

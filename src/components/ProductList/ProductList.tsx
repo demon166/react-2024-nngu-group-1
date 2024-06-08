@@ -1,14 +1,8 @@
 import { FC } from "react";
-import { Updater } from "use-immer";
-import { ICart, ProductItem } from "@/types";
+import { ProductItem } from "@/types";
 import { Product, Row } from "@/components";
 
-interface ProductListProps {
-  updateCart: Updater<ICart>;
-}
-
-const ProductList: FC<ProductListProps> = (props) => {
-  const { updateCart } = props;
+const ProductList: FC = () => {
   const products: ProductItem[] = [
     {
       id: 1,
@@ -39,7 +33,7 @@ const ProductList: FC<ProductListProps> = (props) => {
     <div>
       <Row direction="row">
         {products.map((product) => (
-          <Product key={product.id} product={product} updateCart={updateCart} />
+          <Product key={product.id} product={product} />
         ))}
       </Row>
     </div>
