@@ -1,6 +1,11 @@
-import { Cart, ProductList, Profile } from "@/components";
-import ThemesChanger from "@/components/ThemesChanger/ThemesChanger";
 import { useContext } from "react";
+import {
+  Cart,
+  ProductList,
+  Profile,
+  ThemesChanger,
+  CreateProduct,
+} from "@/components";
 import { ThemeContext } from "@/context/Theme/ThemeProvider";
 
 function App() {
@@ -11,7 +16,7 @@ function App() {
   return (
     <div data-bs-theme={theme}>
       <ThemesChanger />
-      {theme}
+      <CreateProduct />
       {isLoggedIn && <Profile />}
       <ProductList />
       <Cart />

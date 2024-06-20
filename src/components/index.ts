@@ -6,3 +6,5 @@ export { default as Profile } from "./Profile/Profile";
 export { default as ChangeCountProduct } from "./ChangeCountProduct/ChangeCountProduct";
 export { default as MyButton } from "./MyButton/MyButton";
 export { default as Counter } from "./Counter/Counter";
+export { default as ThemesChanger } from "./ThemesChanger/ThemesChanger";
+export { default as CreateProduct } from "./CreateProduct/CreateProduct";
