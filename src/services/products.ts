@@ -1,5 +1,9 @@
 import { api } from "@/app/api";
-import { ProductResponse, ProductStoreRequest } from "@/types/product";
+import {
+  ProductItem,
+  ProductResponse,
+  ProductStoreRequest,
+} from "@/types/product";
 
 export const getProducts = async ({ queryKey }) => {
   const { currentPage, perPage } = queryKey[1];
@@ -10,7 +14,6 @@ export const getProducts = async ({ queryKey }) => {
     },
     transformResponse: (data) => {
       const dataObj = JSON.parse(data);
-      console.log(dataObj);
       return {
         products: dataObj.data,
         pagination: {
@@ -24,6 +27,11 @@ export const getProducts = async ({ queryKey }) => {
       };
     },
   });
+  return data;
+};
+
+export const getProduct = async (id?: string) => {
+  const { data } = await api.get<ProductItem>(`/products/${id}`);
   return data;
 };
 

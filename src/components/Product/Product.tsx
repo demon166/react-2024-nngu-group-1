@@ -3,6 +3,8 @@ import { ChangeCountProduct, MyButton } from "@/components";
 import { useContext } from "react";
 import { CartContext } from "@/context";
 import { changeCount } from "@/context/Cart/actions";
+import { generatePath, Link } from "react-router-dom";
+import { RouteVariable } from "@/route/constants";
 
 interface ProductProps {
   product: ProductItem;
@@ -32,7 +34,11 @@ const Product = (props: ProductProps) => {
   return (
     <div className="card" style={{ width: "18rem" }}>
       <div className="card-body">
-        <p>{product.name}</p>
+        <Link
+          to={generatePath(RouteVariable.productDetail, { id: product.id })}
+        >
+          {product.name}
+        </Link>
         <p>{product.price}</p>
         <p>{product.discount?.value}</p>
         <MyButton onClick={incrementCart}>Купить</MyButton>

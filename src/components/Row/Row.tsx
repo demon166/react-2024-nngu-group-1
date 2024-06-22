@@ -7,7 +7,6 @@ interface RowPros {
 }
 const Row: FC<RowPros> = (props) => {
   const { children, direction = "row", wrap } = props;
-  console.log("Row");
   return (
     <div
       style={{
